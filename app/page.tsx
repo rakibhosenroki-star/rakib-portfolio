@@ -27,8 +27,8 @@ export default function Home() {
       {/* Featured Projects Section */}
       <Projects projects={data.projects} />
 
-      {/* Contact Section with Direct Transmission Form */}
-      <Contact profile={data.profile} />
+      {/* Contact Section with Direct Channels */}
+      <Contact profile={data.profile} socials={data.socials} />
 
       {/* Full Professional Footer */}
       <Footer name={data.profile.name} socials={data.socials} />

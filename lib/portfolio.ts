@@ -47,6 +47,7 @@ export interface PortfolioData {
     facebook: string;
     twitter: string;
     whatsapp: string;
+    telegram?: string;
   };
   skills: SkillItem[];
   projects: ProjectItem[];
@@ -87,7 +88,8 @@ export function getPortfolioData(): PortfolioData {
       linkedin: "https://linkedin.com",
       facebook: "https://facebook.com",
       twitter: "https://twitter.com",
-      whatsapp: "https://wa.me/"
+      whatsapp: "https://wa.me/",
+      telegram: "https://t.me/"
     },
     skills: [],
     projects: [],

@@ -961,6 +961,21 @@ export default function AdminPage() {
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white font-mono text-sm focus:border-[#00f0ff] focus:outline-none"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-xs font-mono text-slate-300 uppercase tracking-wider mb-2">
+                    Telegram Profile Link (e.g. https://t.me/yourusername)
+                  </label>
+                  <input
+                    type="text"
+                    value={data.socials?.telegram || ""}
+                    placeholder="https://t.me/yourusername"
+                    onChange={(e) =>
+                      setData({ ...data, socials: { ...data.socials, telegram: e.target.value } })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white font-mono text-sm focus:border-[#00f0ff] focus:outline-none"
+                  />
+                </div>
               </div>
             </div>
           )}

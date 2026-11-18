@@ -30,7 +30,7 @@ export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [passwordInput, setPasswordInput] = useState<string>("");
   const [authError, setAuthError] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<"profile" | "skills" | "projects" | "socials" | "messages" | "security">("profile");
+  const [activeTab, setActiveTab] = useState<"profile" | "skills" | "projects" | "socials" | "security">("profile");
 
   const [data, setData] = useState<PortfolioData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -474,18 +474,6 @@ export default function AdminPage() {
             >
               <Share2 className="w-4 h-4" />
               <span>Social & Links</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("messages")}
-              className={`w-full flex items-center space-x-3 px-3.5 py-3 rounded-xl font-mono text-xs uppercase tracking-wider transition-all text-left ${
-                activeTab === "messages"
-                  ? "bg-[#00f0ff]/15 text-[#00f0ff] border border-[#00f0ff]/40 shadow-[0_0_10px_rgba(0,240,255,0.2)]"
-                  : "text-slate-400 hover:text-white hover:bg-slate-900"
-              }`}
-            >
-              <Mail className="w-4 h-4" />
-              <span>Dispatches ({data.messages?.length || 0})</span>
             </button>
 
             <button
@@ -977,61 +965,7 @@ export default function AdminPage() {
             </div>
           )}
 
-          {/* TAB 5: MESSAGES RECEIVED */}
-          {activeTab === "messages" && (
-            <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-[#00f0ff]/20 space-y-6">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-mono font-bold text-white flex items-center space-x-2">
-                  <Mail className="w-5 h-5 text-[#00f0ff]" />
-                  <span>Incoming Visitor Dispatches ({data.messages?.length || 0})</span>
-                </h2>
-              </div>
-
-              {(!data.messages || data.messages.length === 0) ? (
-                <div className="p-8 text-center font-mono text-slate-500 text-sm">
-                  No transmissions received yet. All messages sent from the Contact form appear here.
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {data.messages.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className="p-5 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2 relative"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <span className="font-mono font-bold text-white text-sm">{msg.name}</span>
-                          <span className="text-xs font-mono text-[#00f0ff] ml-3">{msg.email}</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                          <span className="text-[11px] font-mono text-slate-500">{msg.date}</span>
-                          <button
-                            onClick={() => handleDeleteMessage(msg.id)}
-                            className="p-1.5 text-slate-500 hover:text-red-400 transition-colors"
-                            title="Delete message"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-
-                      {msg.subject && (
-                        <div className="font-mono text-xs text-[#ff007f] font-semibold">
-                          Subject: {msg.subject}
-                        </div>
-                      )}
-
-                      <p className="text-sm text-slate-300 whitespace-pre-wrap pt-2 border-t border-slate-800/60">
-                        {msg.message}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* TAB 6: SECURITY & EXPORT */}
+          {/* TAB 5: SECURITY & EXPORT */}
           {activeTab === "security" && (
             <div className="space-y-6">
               {/* Password update */}

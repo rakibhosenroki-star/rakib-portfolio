@@ -1,0 +1,73 @@
+{
+  "profile": {
+    "name": "MD. Rakib Hasan",
+    "title": "Full Stack Developer & Node.js Specialist",
+    "tagline": "Crafting futuristic, high-performance web experiences with Tailwind CSS, Node.js & Cyberpunk Glassmorphism.",
+    "bio": "Hi, I am MD. Rakib Hasan. A dedicated Full Stack Web Developer focused on building blazing-fast, responsive web applications with modern architectures, clean code, and sleek cyberpunk neon aesthetics.",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    "email": "rakibhasan@example.com",
+    "phone": "+880 1700-000000",
+    "location": "Dhaka, Bangladesh",
+    "status": "Available for New Projects & Full-time Roles",
+    "resumeUrl": "#"
+  },
+  "socials": {
+    "github": "https://github.com",
+    "linkedin": "https://linkedin.com",
+    "facebook": "https://facebook.com",
+    "twitter": "https://twitter.com",
+    "whatsapp": "https://wa.me/"
+  },
+  "skills": [
+    { "id": "1", "name": "Tailwind CSS", "category": "Frontend", "level": "Expert", "icon": "Palette" },
+    { "id": "2", "name": "Node.js", "category": "Backend", "level": "Expert", "icon": "Server" },
+    { "id": "3", "name": "Next.js & React", "category": "Frontend", "level": "Advanced", "icon": "Code" },
+    { "id": "4", "name": "JavaScript / TypeScript", "category": "Languages", "level": "Advanced", "icon": "FileCode" },
+    { "id": "5", "name": "Cyberpunk & Glassmorphism UI", "category": "Design", "level": "Specialist", "icon": "Sparkles" },
+    { "id": "6", "name": "RESTful APIs & Express", "category": "Backend", "level": "Advanced", "icon": "Globe" },
+    { "id": "7", "name": "MongoDB & PostgreSQL", "category": "Database", "level": "Intermediate", "icon": "Database" },
+    { "id": "8", "name": "Vercel & Git Deployment", "category": "DevOps", "level": "Expert", "icon": "Cloud" }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "CyberMatrix Dashboard",
+      "description": "High-tech real-time analytics monitoring platform built with Next.js, Node.js and neon glassmorphism UI.",
+      "tags": ["Next.js", "Tailwind CSS", "Node.js", "Glassmorphism"],
+      "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "https://vercel.com",
+      "githubUrl": "https://github.com"
+    },
+    {
+      "id": "2",
+      "title": "NeoCommerce Store",
+      "description": "Ultra-fast headless e-commerce experience with dark cyber theme, smooth cart system and payment gateway.",
+      "tags": ["React", "Node.js", "Tailwind CSS", "REST API"],
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "https://vercel.com",
+      "githubUrl": "https://github.com"
+    },
+    {
+      "id": "3",
+      "title": "Quantum Task Controller",
+      "description": "Futuristic project and workflow manager with real-time sync, customizable widgets and dark neon aesthetic.",
+      "tags": ["TypeScript", "Next.js", "Tailwind CSS"],
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "https://vercel.com",
+      "githubUrl": "https://github.com"
+    }
+  ],
+  "messages": [
+    {
+      "id": "sample-1",
+      "name": "Sarah Connor",
+      "email": "sarah@resistance.net",
+      "subject": "Exciting Project Collaboration",
+      "message": "Hi Rakib, love your cyberpunk portfolio design! We would love to discuss a project with you.",
+      "date": "2026-11-18"
+    }
+  ],
+  "admin": {
+    "password": "admin"
+  }
+}

@@ -46,8 +46,8 @@ export default function Navbar({ name = "MD. Rakib Hasan" }: NavbarProps) {
               </div>
               <div className="flex flex-col">
                 <span className="font-mono font-bold text-lg tracking-wider text-white group-hover:text-[#00f0ff] transition-colors">
-                  {name.split(" ")[0]}
-                  <span className="text-[#00f0ff]">.</span>
+                  {name.split(" ")[0].replace(/\.+$/, "")}
+                  <span className="text-[#00f0ff]">. </span>
                   <span className="text-[#ff007f]">{name.split(" ").slice(1).join(" ")}</span>
                 </span>
                 <span className="text-[10px] font-mono tracking-widest text-[#00f0ff]/70 uppercase">

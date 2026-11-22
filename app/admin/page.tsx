@@ -458,7 +458,7 @@ export default function AdminPage() {
               }`}
             >
               <User className="w-4 h-4" />
-              <span>Profile & Identity</span>
+              <span>Profile & Contact Info</span>
             </button>
 
             <button
@@ -634,6 +634,48 @@ export default function AdminPage() {
                     }
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white font-mono text-sm focus:border-[#00f0ff] focus:outline-none"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono text-[#229ED9] uppercase tracking-wider mb-2 flex items-center space-x-1.5 font-bold">
+                    <span>✈️ Telegram Link (Contact Section)</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="https://t.me/yourusername"
+                    value={data.socials?.telegram || ""}
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        socials: { ...data.socials, telegram: e.target.value },
+                      })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-[#229ED9]/40 text-white font-mono text-sm focus:border-[#229ED9] focus:outline-none focus:ring-1 focus:ring-[#229ED9]"
+                  />
+                  <p className="mt-1 text-[11px] font-mono text-slate-500">
+                    This link controls the Telegram card in your public Contact section.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-mono text-[#00ff66] uppercase tracking-wider mb-2 flex items-center space-x-1.5 font-bold">
+                    <span>💬 WhatsApp Link / Number</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="https://wa.me/8801700000000"
+                    value={data.socials?.whatsapp || ""}
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        socials: { ...data.socials, whatsapp: e.target.value },
+                      })
+                    }
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-[#00ff66]/40 text-white font-mono text-sm focus:border-[#00ff66] focus:outline-none focus:ring-1 focus:ring-[#00ff66]"
+                  />
+                  <p className="mt-1 text-[11px] font-mono text-slate-500">
+                    This link controls the WhatsApp chat button in your public Contact section.
+                  </p>
                 </div>
 
                 <div>

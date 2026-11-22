@@ -90,11 +90,20 @@ export default function AdminPage() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/portfolio");
+      const res = await fetch("/api/portfolio", { cache: "no-store" });
       const json = await res.json();
-      setData(json);
+      if (json && json.profile) {
+        setData(json);
+        try {
+          localStorage.setItem("rakib_portfolio_data", JSON.stringify(json));
+        } catch (e) {}
+      }
     } catch (err) {
       console.error("Failed to load portfolio:", err);
+      try {
+        const local = localStorage.getItem("rakib_portfolio_data");
+        if (local) setData(JSON.parse(local));
+      } catch (e) {}
     } finally {
       setLoading(false);
     }
@@ -136,45 +145,57 @@ export default function AdminPage() {
     sessionStorage.removeItem("rakib_admin_auth");
   };
 
-  // Save changes to backend
+  // Save changes to backend and client storage
   const handleSaveChanges = async () => {
     if (!data) return;
     setSaveStatus("saving");
     setStatusMessage("");
 
     try {
+      const effectivePassword = newPassword ? newPassword : (passwordInput || "admin");
       const payload = {
         ...data,
         admin: {
-          password: newPassword ? newPassword : passwordInput,
+          password: effectivePassword,
         },
       };
 
+      // 1. Instantly save to localStorage and dispatch event for real-time live preview
+      try {
+        localStorage.setItem("rakib_portfolio_data", JSON.stringify(payload));
+        window.dispatchEvent(new Event("portfolio-updated"));
+      } catch (e) {}
+
+      // 2. Save to backend API
       const res = await fetch("/api/portfolio", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-admin-password": passwordInput,
+          "x-admin-password": passwordInput || "admin",
         },
         body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
-        // If password was wrong on server
         if (res.status === 401) {
           throw new Error("Authentication failed. Wrong password.");
         }
         throw new Error("Failed to save changes.");
       }
 
+      const result = await res.json();
+      if (result.data) {
+        setData(result.data);
+      }
+
       setSaveStatus("saved");
-      setStatusMessage("Portfolio data updated successfully!");
+      setStatusMessage("✅ পরিবর্তনগুলো সফলভাবে সেভ হয়েছে! (All changes saved successfully)");
       if (newPassword) {
         setPasswordInput(newPassword);
         sessionStorage.setItem("rakib_admin_auth", newPassword);
         setNewPassword("");
       }
-      setTimeout(() => setSaveStatus("idle"), 4000);
+      setTimeout(() => setSaveStatus("idle"), 5000);
     } catch (err: any) {
       setSaveStatus("error");
       setStatusMessage(err.message || "Failed to save.");
@@ -643,6 +664,21 @@ export default function AdminPage() {
                   />
                 </div>
               </div>
+
+              {/* Save Bar */}
+              <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-mono text-slate-400">
+                  Ready to apply profile updates?
+                </span>
+                <button
+                  onClick={handleSaveChanges}
+                  disabled={saveStatus === "saving"}
+                  className="cyber-btn-cyan px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                >
+                  <Save className="w-4 h-4" />
+                  <span>{saveStatus === "saving" ? "Saving Profile..." : "Save Profile Changes"}</span>
+                </button>
+              </div>
             </div>
           )}
 
@@ -719,6 +755,21 @@ export default function AdminPage() {
                       </button>
                     </div>
                   ))}
+                </div>
+
+                {/* Save Bar */}
+                <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-xs font-mono text-slate-400">
+                    Done editing skills?
+                  </span>
+                  <button
+                    onClick={handleSaveChanges}
+                    disabled={saveStatus === "saving"}
+                    className="cyber-btn-cyan px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{saveStatus === "saving" ? "Saving..." : "Save Skills Changes"}</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -879,6 +930,21 @@ export default function AdminPage() {
                     </button>
                   </div>
                 ))}
+
+                {/* Save Bar for Projects */}
+                <div className="glass-panel p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-xs font-mono text-slate-400">
+                    Done adding or modifying projects?
+                  </span>
+                  <button
+                    onClick={handleSaveChanges}
+                    disabled={saveStatus === "saving"}
+                    className="cyber-btn-cyan px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{saveStatus === "saving" ? "Saving Projects..." : "Save Project Changes"}</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -976,6 +1042,21 @@ export default function AdminPage() {
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white font-mono text-sm focus:border-[#00f0ff] focus:outline-none"
                   />
                 </div>
+
+                {/* Save Bar */}
+                <div className="pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-xs font-mono text-slate-400">
+                    Ready to apply social channel links?
+                  </span>
+                  <button
+                    onClick={handleSaveChanges}
+                    disabled={saveStatus === "saving"}
+                    className="cyber-btn-cyan px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{saveStatus === "saving" ? "Saving..." : "Save Social Channels"}</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -1000,9 +1081,14 @@ export default function AdminPage() {
                     onChange={(e) => setNewPassword(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-white font-mono text-sm focus:border-[#ff007f] focus:outline-none"
                   />
-                  <p className="text-[11px] font-mono text-slate-500">
-                    Click &quot;Save All Changes&quot; in the header bar to apply this new password.
-                  </p>
+                  <button
+                    onClick={handleSaveChanges}
+                    disabled={saveStatus === "saving" || !newPassword}
+                    className="cyber-btn-magenta px-5 py-2 rounded-xl font-mono text-xs font-bold uppercase tracking-wider flex items-center space-x-2 disabled:opacity-50"
+                  >
+                    <Save className="w-3.5 h-3.5" />
+                    <span>{saveStatus === "saving" ? "Saving..." : "Save New Password"}</span>
+                  </button>
                 </div>
               </div>
 
